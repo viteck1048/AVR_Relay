@@ -1,0 +1,612 @@
+#include "configboard.h"
+
+
+
+
+void dsp_cls()
+{
+	lcd.clear();
+}
+
+
+
+void set_jaskravist_down() {
+	if(jaskravist < 15)
+		jaskravist++;
+	analogWrite(DISPLEY_Y, jaskravist * 17);
+}
+
+
+void set_jaskravist_up() {
+	if(jaskravist)
+		jaskravist--;
+	analogWrite(DISPLEY_Y, jaskravist * 17);
+}
+
+
+char get_jaskravist() {
+	return 16 - jaskravist;
+}
+
+
+//user's characters
+
+void inic_user_ch()
+{
+	byte ch[8];
+	
+	ch[0] = 0b00011;
+	ch[1] = 0b00001;
+	ch[2] = 0b00001;
+	ch[3] = 0b00001;
+	ch[4] = 0b00001;
+	ch[5] = 0b00001;
+	ch[6] = 0b00001;
+	ch[7] = 0b00001;
+	lcd.createChar(0, ch);
+	
+	ch[0] = 0b00011;
+	ch[1] = 0b00001;
+	ch[2] = 0b00001;
+	ch[3] = 0b00001;
+	ch[4] = 0b00001;
+	ch[5] = 0b00001;
+	ch[6] = 0b00001;
+	ch[7] = 0b00001;
+	lcd.createChar(1, ch);
+	
+	ch[0] = 0b11000;
+	ch[1] = 0b10000;
+	ch[2] = 0b10000;
+	ch[3] = 0b10000;
+	ch[4] = 0b10000;
+	ch[5] = 0b10000;
+	ch[6] = 0b10000;
+	ch[7] = 0b10000;
+	lcd.createChar(2, ch);
+	
+	ch[0] = 0b10000;
+	ch[1] = 0b10000;
+	ch[2] = 0b10000;
+	ch[3] = 0b10000;
+	ch[4] = 0b10000;
+	ch[5] = 0b10000;
+	ch[6] = 0b10000;
+	ch[7] = 0b11000;
+	lcd.createChar(3, ch);
+	
+	ch[0] = 0b00011;
+	ch[1] = 0b00001;
+	ch[2] = 0b00001;
+	ch[3] = 0b00001;
+	ch[4] = 0b00001;
+	ch[5] = 0b00001;
+	ch[6] = 0b00001;
+	ch[7] = 0b00011;
+	lcd.createChar(4, ch);
+	
+	ch[0] = 0b11000;
+	ch[1] = 0b10000;
+	ch[2] = 0b10000;
+	ch[3] = 0b10000;
+	ch[4] = 0b10000;
+	ch[5] = 0b10000;
+	ch[6] = 0b10000;
+	ch[7] = 0b11000;
+	lcd.createChar(5, ch);
+	
+	ch[0] = 0b11100;
+	ch[1] = 0b00100;
+	ch[2] = 0b00100;
+	ch[3] = 0b10101;
+	ch[4] = 0b01110;
+	ch[5] = 0b00100;
+	ch[6] = 0b00100;
+	ch[7] = 0b00111;
+	lcd.createChar(6, ch);
+	
+	ch[0] = 0b00111;
+	ch[1] = 0b00100;
+	ch[2] = 0b00100;
+	ch[3] = 0b01110;
+	ch[4] = 0b10101;
+	ch[5] = 0b00100;
+	ch[6] = 0b00100;
+	ch[7] = 0b11100;
+	lcd.createChar(7, ch);
+	
+	ch[0] = 0b00100;
+	ch[1] = 0b00100;
+	ch[2] = 0b00100;
+	ch[3] = 0b00100;
+	ch[4] = 0b00100;
+	ch[5] = 0b10101;
+	ch[6] = 0b01110;
+	ch[7] = 0b00100;
+	lcd.createChar(8, ch);
+	
+	ch[0] = 0b00000;
+	ch[1] = 0b00000;
+	ch[2] = 0b00000;
+	ch[3] = 0b11111;
+	ch[4] = 0b00000;
+	ch[5] = 0b10101;
+	ch[6] = 0b00000;
+	ch[7] = 0b00000;
+	lcd.createChar(9, ch);
+	
+	ch[0] = 0b00000;
+	ch[1] = 0b11111;
+	ch[2] = 0b11111;
+	ch[3] = 0b11111;
+	ch[4] = 0b11111;
+	ch[5] = 0b11111;
+	ch[6] = 0b11111;
+	ch[7] = 0b00000;
+	lcd.createChar(10, ch);
+	
+	ch[0] = 0b00000;
+	ch[1] = 0b11100;
+	ch[2] = 0b00010;
+	ch[3] = 0b11001;
+	ch[4] = 0b00101;
+	ch[5] = 0b10101;
+	ch[6] = 0b00000;
+	ch[7] = 0b00000;
+	lcd.createChar(11, ch);
+	
+}
+
+
+void prnt_rama()
+{
+	dsplbuf.dsplbuf_clear();
+	dsplbuf.prnt(0, 7, NULL, 4, 0);
+	dsplbuf.prnt(0, 8, NULL, 5, 0);
+	dsplbuf.prnt(1, 7, NULL, 4, 0);
+	dsplbuf.prnt(1, 8, NULL, 5, 0);
+	dsplbuf.prnt(2, 7, NULL, 4, 0);
+	dsplbuf.prnt(2, 8, NULL, 5, 0);
+	dsplbuf.prnt(3, 7, NULL, 4, 0);
+	dsplbuf.prnt(3, 8, NULL, 5, 0);
+	dsplbuf.prnt(4, 7, NULL, 4, 0);
+	dsplbuf.prnt(4, 8, NULL, 5, 0);
+	dsplbuf.prnt(5, 7, NULL, 4, 0);
+	dsplbuf.prnt(5, 8, NULL, 5, 0);
+	dsplbuf.prnt(6, 7, NULL, 4, 0);
+	dsplbuf.prnt(6, 8, NULL, 5, 0);
+	dsplbuf.prnt(7, 7, NULL, 4, 0);
+	dsplbuf.prnt(7, 8, NULL, 5, 0);
+}
+
+
+void prnt_1x7(unsigned short int type, byte y, byte x)
+{
+	byte pp;
+	switch(type) {
+		case 0b1100:{
+			if(((obscht_r + tek_r) / 3600) < 10000) {
+				pp = dsplbuf.prnt(y, x, "%4d", ((obscht_r + tek_r) / 3600) % 10000, 1);
+				pp = dsplbuf.prnt(y, pp, NULL, (tek_r % 2 == 1 || tmr_ == 0) ? 0x3a : 0x20, 0);
+				dsplbuf.prnt(y, pp, "%02d", ((obscht_r + tek_r) / 60) % 60, 1);
+			}
+			else if(((obscht_r + tek_r) / 3600) < 100000) {
+				pp = dsplbuf.prnt(y, x, "%5d", ((obscht_r + tek_r) / 3600) % 10000, 1);
+				if(((obscht_r + tek_r) / 3600) / 10000 != 0)
+					dsplbuf.prnt(y, x, "%1d", ((obscht_r + tek_r) / 3600) / 10000, 1);
+				pp = dsplbuf.prnt(y, pp, NULL, (tek_r % 2 == 1 || tmr_ == 0) ? (byte)'.' : 0x20, 0);
+				dsplbuf.prnt(y, pp, "%d", ((obscht_r + tek_r) / 360) % 10, 1);
+			}
+			else {
+				pp = dsplbuf.prnt(y, x, "%7u", ((obscht_r + tek_r) / 3600) % 10000, 1);
+				if(((obscht_r + tek_r) / 3600) / 10000 != 0)
+					dsplbuf.prnt(y, x, "%3u", ((obscht_r + tek_r) / 3600) / 10000, 1);
+			}
+			break;
+		}
+		case 0b1101:{
+			pp = dsplbuf.prnt(y, x, "%4d", tek_r / 3600, 1);
+			pp = dsplbuf.prnt(y, pp, NULL, (tek_r % 2 == 1 || tmr_ == 0) ? 0x3a : 0x20, 0);
+			dsplbuf.prnt(y, pp, "%02d", (tek_r / 60) % 60, 1);
+			break;
+		}
+		case 0b1110:{
+			pp = dsplbuf.prnt(y, x, NULL, IN_1 == true ? 0xff : 0xdb, 0);
+			pp = dsplbuf.prnt(y, pp, NULL, IN_2 == true ? 0xff : 0xdb, 0);
+			pp = dsplbuf.prnt(y, pp, NULL, IN_3 == true ? 0xff : 0xdb, 0);
+			pp = dsplbuf.prnt(y, pp, NULL, 0x7e, 0);
+			pp = dsplbuf.prnt(y, pp, NULL, digitalRead(OUT_1) == true ? 0xff : 0xdb, 0);
+			pp = dsplbuf.prnt(y, pp, NULL, digitalRead(OUT_2) == true ? 0xff : 0xdb, 0);
+			dsplbuf.prnt(y, pp, NULL, digitalRead(OUT_3) == true ? 0xff : 0xdb, 0);
+			break;
+		}
+		case 0b0000:{
+			rv[0].prnt(y, x);
+			break;
+		}
+		case 0b0001:{
+			rv[1].prnt(y, x);
+			break;
+		}
+		case 0b0010:{
+			rv[2].prnt(y, x);
+			break;
+		}
+		case 0b0100:{
+			ri[0].prnt(y, x);
+			break;
+		}
+		case 0b0101:{
+			ri[1].prnt(y, x);
+			break;
+		}
+		case 0b0110:{
+			ri[2].prnt(y, x);
+			break;
+		}
+		case 0b1000:{
+			rz[0].prnt(y, x);
+			break;
+		}
+		case 0b1001:{
+			rz[1].prnt(y, x);
+			break;
+		}
+		case 0b1010:{
+			rz[2].prnt(y, x);
+			break;
+		}
+#ifdef WIFI8266
+		case 0b1011:{
+			if(x == 0)
+				dsplbuf.prnt(y, 7, NULL, 11, 0);
+			else
+				dsplbuf.prnt(y, 8, NULL, 11, 0);
+			if(updWiFi == 1) {
+				dsplbuf.prnt(y, x, " RESET ", 0, 0);
+				wifi_enable_fl = 1;
+			}
+			else if(wifi_enable_fl == 0)
+				dsplbuf.prnt(y, x, "NET off", 0, 0);
+			else if(wifi_enable_fl == 1)
+				dsplbuf.prnt(y, x, "Discon.", 0, 0);
+			else
+				dsplbuf.prnt(y, x, "Connect", 0, 0);
+			break;
+		}
+#endif
+		case 0x0f:{
+			dsplbuf.prnt(y, x, "% 2d qwe", y, 1);
+			break;
+		}
+#ifdef WIFI8266
+		case 93:{
+			dsplbuf.prnt(0, 0, "%16s", (char*)resv_buf, 1);
+			break;
+		}
+		case 94:{
+			dsplbuf.prnt(0, 0, "%d", resv_buf[14], 1);
+			break;
+		}
+#endif
+		case 95:{
+			dsplbuf.prnt(y, x, "% 7d", sprac_r_1, 1);
+			break;
+		}
+		case 96:{
+			dsplbuf.prnt(y, x, "% 7d", sprac_r_2, 1);
+			break;
+		}
+		case 97:{
+			dsplbuf.prnt(y, x, "% 7d", sprac_r_3, 1);
+			break;
+		}
+		case 98:{
+			dsplbuf.prnt(y, x, "% 4d", napruga_z_klavy < 1000 ? napruga_z_klavy : 1024, 1);
+			break;
+		}
+		case 99:{
+			pp = dsplbuf.prnt(y, x, "% 4d:", (test_time / 3600), 1);
+			pp = dsplbuf.prnt(y, pp, "%02d", ((test_time / 60) % 60), 1);
+			pp = dsplbuf.prnt(y, pp, NULL, (test_time % 2) == 0 ? 0x3a : 0x20, 0);
+			dsplbuf.prnt(y, pp, "%02d", test_time % 60, 1);
+			break;
+		}
+		default:{
+			break;
+		}
+	}
+}
+
+
+void prnt_intrf()
+{
+#ifdef TIME_CONTROL
+//	digitalWrite(CONTROL_OUT_5, 1);
+#endif
+	byte bii;
+	prnt_rama();
+	for(bii = 0; bii < 16; bii++) {
+		if(arr_golovne_menu[bii] == 0x0f) {
+			break;
+		}
+		prnt_1x7((arr_golovne_menu[bii] & 0x0f), bii / 2, (bii % 2) * 9);
+	}
+#ifdef PRNT_RESV
+	prnt_1x7(93, 0, 0);
+#endif
+	if(bii == 0) {
+		dsplbuf.prnt(0, 0, "push`Enter`10s.", 0, 0);
+		cory.setDiap(0, 1, 0, 1);
+		dsplbuf.offblnk();
+	}
+	else {
+		bii--;
+		cory.setDiap(0, bii / 2, 7, 8);
+		dsplbuf.onblnk();
+	}
+	if((bii / 2) == 0) {
+		dsplbuf.prnt(1, 7, "  ", 0, 0);
+	}
+#ifdef TIME_CONTROL
+//	digitalWrite(CONTROL_OUT_5, 0);
+#endif
+}
+
+
+void prntstr_set(byte y, byte x, byte bb)
+{
+	switch(bb) {
+		case 0b1100:{
+			dsplbuf.prnt(y, x, "mash tm", 0, 0);
+			break;
+		}
+		case 0b1101:{
+			dsplbuf.prnt(y, x, "det tm", 0, 0);
+			break;
+		}
+		case 0b1110:{
+			dsplbuf.prnt(y, x, "IN->OUT", 0, 0);
+			break;
+		}
+		case 0b0000:{
+			dsplbuf.prnt(y, x, "RV_1", 0, 0);
+			break;
+		}
+		case 0b0001:{
+			dsplbuf.prnt(y, x, "RV_2", 0, 0);
+			break;
+		}
+		case 0b0010:{
+			dsplbuf.prnt(y, x, "RV_3", 0, 0);
+			break;
+		}
+		case 0b0100:{
+			dsplbuf.prnt(y, x, "Ri_1", 0, 0);
+			break;
+		}
+		case 0b0101:{
+			dsplbuf.prnt(y, x, "Ri_2", 0, 0);
+			break;
+		}
+		case 0b0110:{
+			dsplbuf.prnt(y, x, "Ri_3", 0, 0);
+			break;
+		}
+		case 0b1000:{
+			dsplbuf.prnt(y, x, "RZ_1", 0, 0);				
+			break;
+		}
+		case 0b1001:{
+			dsplbuf.prnt(y, x, "RZ_2", 0, 0);
+			break;
+		}
+		case 0b1010:{
+			dsplbuf.prnt(y, x, "RZ_3", 0, 0);
+			break;
+		}
+#ifdef WIFI8266
+		case 0b1011:{
+			dsplbuf.prnt(y, x, "WiFi", 0, 0);
+			break;
+		}
+#endif
+		default:{
+			dsplbuf.prnt(y, x, "unkn", 0, 0);
+			break;
+		}
+	}
+}
+
+
+char set_admin(char key)
+{
+	static byte poz;
+	if(navihacija_menu == 3) {
+				
+		prnt_rama();
+		
+		byte i;
+		for(i = 0; i < 16; i++) {
+			prntstr_set(i / 2, (i % 2) * 9, arr_golovne_menu[i]);
+		}
+		cory.setDiap(0, 7, 7, 8);
+		dsplbuf.onblnk();
+		if(key == VK_RETURN) {
+			poz = cory.getPoz();
+			navihacija_menu += 0b0100;
+			key = 0;
+		}
+		if(key == VK_RIGHT && cory.get() == 0x07) {
+#ifdef NEW_MEM
+			save_adminset();
+#endif
+#ifdef WIFI8266
+			updt_admset = 1;
+#endif
+			return 0;
+		}
+	}
+	else if(L(navihacija_menu) == 0b0111) {
+		byte menu[8];
+		dsplbuf.dsplbuf_clear();
+		byte i = 0;
+		byte ii;
+		menu[i] = arr_golovne_menu[poz];
+		prntstr_set(i, 2, menu[i]);
+		i++;
+		for(ii = 0; ii < 16; ii++) {
+			if(arr_golovne_menu[ii] == 0b1100) {
+				break;
+			}
+		}
+		if(ii == 16) {
+			menu[i] = 0b1100;
+			prntstr_set(i, 2, menu[i]);
+			i++;
+		}
+		
+		for(ii = 0; ii < 16; ii++) {
+			if(arr_golovne_menu[ii] == 0b1101) {
+				break;
+			}
+		}
+		if(ii == 16) {
+			menu[i] = 0b1101;
+			prntstr_set(i, 2, menu[i]);
+			i++;
+		}
+		
+		for(ii = 0; ii < 16; ii++) {
+			if(arr_golovne_menu[ii] == 0b1110) {
+				break;
+			}
+		}
+		if(ii == 16) {
+			menu[i] = 0b1110;
+			prntstr_set(i, 2, menu[i]);
+			i++;
+		}
+#ifdef WIFI8266
+		for(ii = 0; ii < 16; ii++) {
+			if(arr_golovne_menu[ii] == 0b1011) {
+				break;
+			}
+		}
+		if(!wifi_enable_fl)
+			ii = 0;
+		if(ii == 16) {
+			menu[i] = 0b1011;
+			prntstr_set(i, 2, menu[i]);
+			i++;
+		}
+#endif
+		byte iii;
+		if((arr_golovne_menu[poz] & 0b1100) != 0) {
+			for(iii = 0; iii < 3; iii++) {
+				for(ii = 0; ii < 16; ii++) {
+					if((arr_golovne_menu[ii] & 0b1111) == (0b0000 | iii)) {
+						break;
+					}
+				}	
+				if(ii == 16) {
+					menu[i] = 0b0000 + iii;
+					prntstr_set(i, 2, menu[i]);
+					i++;
+					break;
+				}
+			}
+		}
+		
+		if((arr_golovne_menu[poz] & 0b1100) != 0b0100) {
+			for(iii = 0; iii < 3; iii++) {
+				for(ii = 0; ii < 16; ii++) {
+					if((arr_golovne_menu[ii] & 0b1111) == (0b0100 | iii)) {
+						break;
+					}
+				}	
+				if(ii == 16) {
+					menu[i] = 0b0100 + iii;
+					prntstr_set(i, 2, menu[i]);
+					i++;
+					break;
+				}
+			}
+		}
+		
+		if((arr_golovne_menu[poz] & 0b1100) != 0b1000) {
+			for(iii = 0; iii < 3; iii++) {
+				for(ii = 0; ii < 16; ii++) {
+					if((arr_golovne_menu[ii] & 0b1111) == (0b1000 | iii)) {
+						break;
+					}
+				}	
+				if(ii == 16) {
+					menu[i] = 0b1000 + iii;
+					prntstr_set(i, 2, menu[i]);
+					i++;
+					break;
+				}
+			}
+		}
+		
+		menu[i] = 0xf;
+		prntstr_set(i, 2, menu[i]);
+		cory.setDiap(0, i, 0, 0);
+		dsplbuf.onblnk();
+		if(key == VK_RETURN) {
+			byte poz2 = cory.getPoz();
+			
+			if(arr_golovne_menu[poz] != menu[poz2]) {
+				if((arr_golovne_menu[poz] & 0b1100) == 0b0000) {
+					rv[arr_golovne_menu[poz] & 0b0011].nullset();
+				}
+				if((arr_golovne_menu[poz] & 0b1100) == 0b0100) {
+					ri[arr_golovne_menu[poz] & 0b0011].nullset();
+				}
+				if((arr_golovne_menu[poz] & 0b1100) == 0b1000 && (arr_golovne_menu[poz] & 0b1111) != 0b1011) {
+					rz[arr_golovne_menu[poz] & 0b0011].nullset();
+				}
+			}
+			
+			arr_golovne_menu[poz] = menu[poz2];
+			navihacija_menu &= 0b11110011;
+			navihacija_menu |= 0b00001000;//				navihacija_menu = 3;	cory.setDiap(0, 7, 7, 8);	cory.set(poz / 2, (poz % 2) + 7);
+			key = 0;
+//			writeData(71 + poz, (long int)menu[poz2]);
+			return navihacija_menu;
+		
+		}
+	}
+	else if((navihacija_menu & 0b00001111) == 0b00001011) {
+		if((arr_golovne_menu[poz] & 0b1100) == 0b0000) {
+			navihacija_menu = rv[arr_golovne_menu[poz] & 0b0011].admset(key, navihacija_menu);
+		}
+		else if((arr_golovne_menu[poz] & 0b1100) == 0b0100) {
+			navihacija_menu = ri[arr_golovne_menu[poz] & 0b0011].admset(key, navihacija_menu);
+		}
+		else if((arr_golovne_menu[poz] & 0b1100) == 0b1000 && (arr_golovne_menu[poz] & 0b1111) != 0b1011) {
+			navihacija_menu = rz[arr_golovne_menu[poz] & 0b0011].admset(key, navihacija_menu);
+		}
+#ifdef WIFI8266
+		else if((arr_golovne_menu[poz] & 0b1111) == 0b1011) {
+			navihacija_menu = wifiset(key, navihacija_menu);
+			if(navihacija_menu == 0xff)
+				navihacija_menu = 3;
+		}
+#endif
+		else if((arr_golovne_menu[poz] & 0b1111) == 0b1100) {
+			navihacija_menu = admset(key, navihacija_menu);
+		}
+		else {
+			navihacija_menu = 3;
+		}
+		if(navihacija_menu == 3) {
+			cory.setDiap(0, 7, 7, 8);
+			cory.set(poz / 2, (poz % 2) + 7);
+		}
+	}
+	
+	
+	return navihacija_menu;
+}

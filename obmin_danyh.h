@@ -1,0 +1,4 @@
+
+byte reedSerial();
+byte writeSerial();
+
