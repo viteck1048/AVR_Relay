@@ -191,7 +191,7 @@ void prnt_1x7(unsigned short int type, byte y, byte x)
 				dsplbuf.prnt(y, pp, "%02d", ((obscht_r + tek_r) / 60) % 60, 1);
 			}
 			else if(((obscht_r + tek_r) / 3600) < 100000) {
-				pp = dsplbuf.prnt(y, x, "%05d", ((obscht_r + tek_r) / 3600) % 10000, 1);
+				pp = dsplbuf.prnt(y, x, "%5d", ((obscht_r + tek_r) / 3600) % 10000, 1);
 				if(((obscht_r + tek_r) / 3600) / 10000 != 0)
 					dsplbuf.prnt(y, x, "%1d", ((obscht_r + tek_r) / 3600) / 10000, 1);
 				pp = dsplbuf.prnt(y, pp, NULL, (tek_r % 2 == 1 || tmr_ == 0) ? (byte)'.' : 0x20, 0);

@@ -540,6 +540,34 @@ byte wifiset(char key, byte navihacija_menu)
 			setstr[32] = 0;
 			dsplbuf.prnt(6, 0, "Set host PORT:", 0, 0);
 			*((long*)(&(setstr[16]))) = (long)readEEPROM(ADR_PORT, _LONG);
+			if(*((long*)(&(setstr[16]))) < 0 || *((long*)(&(setstr[16]))) > 99999) {
+				*((long*)(&(setstr[16]))) = 0;
+				setstr[0] = 192;
+				setstr[1] = 168;
+				setstr[2] = 1;
+				setstr[3] = 0;
+				writeStringEEPROM(ADR_IP, 4, setstr);
+				setstr[0] = 255;
+				setstr[1] = 255;
+				setstr[2] = 255;
+				setstr[3] = 0;
+				writeStringEEPROM(ADR_SUBNET, 4, setstr);
+				setstr[0] = 192;
+				setstr[1] = 168;
+				setstr[2] = 1;
+				setstr[3] = 1;
+				writeStringEEPROM(ADR_GATE, 4, setstr);
+				setstr[0] = 192;
+				setstr[1] = 168;
+				setstr[2] = 1;
+				setstr[3] = 1;
+				writeStringEEPROM(ADR_DNS1, 4, setstr);
+				setstr[0] = 8;
+				setstr[1] = 8;
+				setstr[2] = 8;
+				setstr[3] = 8;
+				writeStringEEPROM(ADR_DNS2, 4, setstr);
+			}
 			dsplbuf.prnt(7, 2, "%.5d", *((long*)(&(setstr[16]))), 1);
 			batjarelay::set_st = 5;
 			local_coord_x = 0;

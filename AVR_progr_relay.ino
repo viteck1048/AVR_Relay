@@ -237,6 +237,13 @@ void setup()
 	sei();
 #endif
 	clearSerialBuffer();
+	
+	in = virt_out & 0x1fff;
+	in += ((short)IN_1) << 15;
+	in += ((short)IN_2) << 14;
+	in += ((short)IN_3) << 13;
+	in_mem = in;
+	
 //	writeEEPROM(sprac_r_3, _LONG, (long int)0);
 	return;
 }

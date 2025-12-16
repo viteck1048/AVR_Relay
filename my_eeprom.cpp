@@ -361,6 +361,9 @@ bool load()
 	sprac_r_3 = 0;
 	short int point = 0;
 	if(!valid_eeprom()) {
+#ifdef WIFI8266
+		writeEEPROM(ADR_PORT, _LONG, 0x00000000);
+#endif
 		writeEEPROM(MAX_MEM_EPROM - 1, _BYTE, (long int)VER_MEM);
 		writeEEPROM(point, _LONG, (long int)0xe4c);		//obscht_r
 		point += _LONG;

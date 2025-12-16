@@ -16,10 +16,7 @@ Bootloader: No bootloader
 
 */
 
-//#define D_O_ON 0
-#define D_O_ON 1
-//#define D_O_OFF 1
-#define D_O_OFF 0
+//#define D_O_ON 0 // coment it if digital_out_on = 1
 
 //#define _5C276
 //#define _5A283
@@ -40,6 +37,13 @@ Bootloader: No bootloader
 
 #ifdef BACKLIGHT_CONTROL
 	#define BLC_PIN 23
+#endif
+
+#ifndef D_O_ON
+	#define D_O_ON 1
+#endif
+#ifndef D_O_OFF
+	#define D_O_OFF !D_O_ON
 #endif
 
 #ifdef _5C276
